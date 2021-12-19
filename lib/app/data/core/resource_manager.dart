@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_getx_retrofit_example/app/data/core/initial_rx.dart';
 import 'package:flutter_getx_retrofit_example/app/data/core/resource.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,14 @@ class NetworkOnlyResource<ResultType, RequestType>
         result.value = Resource.error('Terjadi kesalahan');
       }
     }).catchError((onError) {
-      result.value = Resource.error('Request time out');
+      var error = onError as DioError;
+      var errorMsg = '';
+      if (error.type == DioErrorType.connectTimeout) {
+        errorMsg = 'Request time out';
+      } else {
+        errorMsg = 'Terjadi kesalahan pada aplikasi';
+      }
+      result.value = Resource.error(errorMsg);
     });
   }
 

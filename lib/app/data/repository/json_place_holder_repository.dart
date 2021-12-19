@@ -7,11 +7,6 @@ class JsonPlaceHolderRepository {
   final JsonPlaceHolderService _jsonPlaceHolderService =
       JsonPlaceHolderDataSource().jsonPlaceHolder;
 
-  Future<List<ResPost>> getResPostList() async {
-    var result = await _jsonPlaceHolderService.jsonPost();
-    return result;
-  }
-
   ResourceManager getListPost() {
     return NetworkOnlyResource<List<ResPost>, List<ResPost>>(
       createCall: () => _jsonPlaceHolderService.jsonPost(),

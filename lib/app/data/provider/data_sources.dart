@@ -26,13 +26,13 @@ class JsonPlaceHolderInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     log('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-    log('${response.data}');
+    // log('${response.data}');
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    log('ERROR[${err.response?.statusCode}] MESSAGE: ${err.message} => PATH: ${err.requestOptions.path}');
+    log('ERROR[${err.response?.statusCode}] MESSAGE: ${err.message} $err => PATH: ${err.requestOptions.path}');
     super.onError(err, handler);
   }
 }
